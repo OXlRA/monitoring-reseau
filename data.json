@@ -3,6 +3,8 @@
         {"nom": "Routeur principal", "ip": "8.8.8.8"},
         {"nom": "Serveur DNS Google", "ip": "8.8.4.4"},
         {"nom": "Serveur Cloudflare", "ip": "1.1.1.1"},
+        {"nom": "Mon PC", "ip": "192.168.1.22"},
+        {"nom": "Ma Box", "ip": "192.168.1.1"},
         {"nom": "Equipement fictif", "ip": "192.168.1.99"}
     ]
 }
