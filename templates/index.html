@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitoring Réseau</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Tableau de bord - Monitoring Réseau</h1>
+    <button onclick="rafraichir()">Rafraîchir</button>
+    <table id="tableau">
+        <thead>
+            <tr>
+                <th>Équipement</th>
+                <th>Adresse IP</th>
+                <th>Statut</th>
+            </tr>
+        </thead>
+        <tbody id="corps-tableau">
+        </tbody>
+    </table>
+
+    <script>
+        function rafraichir() {
+            fetch('/api/statuts')
+                .then(response => response.json())
+                .then(data => {
+                    const corps = document.getElementById('corps-tableau');
+                    corps.innerHTML = '';
+                    data.forEach(eq => {
+                        const ligne = document.createElement('tr');
+                        ligne.className = eq.statut === 'En ligne' ? 'en-ligne' : 'hors-ligne';
+                        ligne.innerHTML = `
+                            <td>${eq.nom}</td>
+                            <td>${eq.ip}</td>
+                            <td>${eq.statut}</td>
+                        `;
+                        corps.appendChild(ligne);
+                    });
+                });
+        }
+        rafraichir();
+    </script>
+</body>
+</html>
